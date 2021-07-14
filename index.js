@@ -2,9 +2,10 @@
  * 前端 CLI 工程化
  * 1. 需要实现的功能, 拉取应用模版
 */
+require('module-alias/register');
 const commander = require('commander');
-const { info } = require('./logs');
-const { getVersion } = require('./utils/version');
+const { info } = require('@logger');
+const { getVersion } = require('@utils/version');
 
 const { program } = commander;
 

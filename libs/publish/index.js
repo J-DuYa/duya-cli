@@ -1,4 +1,4 @@
-const { warning } = require('./../../logs');
+const { warning } = require('@logger');
 const npm = require('./npm');
 const push = require('./github');
 
@@ -10,4 +10,5 @@ module.exports = async () => {
   await npm();
 
   await push();
+
 };

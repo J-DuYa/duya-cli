@@ -1,4 +1,4 @@
-const { error, info } = require('./../../logs');
+const { error, info } = require('@logger');
 const execa = require('execa');
 
 module.exports = () => {
