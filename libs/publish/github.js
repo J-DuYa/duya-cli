@@ -1,7 +1,7 @@
 const { error, info } = require('@logger');
 const execa = require('execa');
 
-module.exports = () => {
+module.exports = (commit) => {
   return new Promise(async resolve => {
     try {
 
@@ -9,7 +9,7 @@ module.exports = () => {
       await execa('git', ['add', '.']);
 
       // 编辑提交信息 暂时写死
-      await execa('git', ['commit', '-m', 'feat: 这是脚手架 push 的代码']);
+      await execa('git', ['commit', '-m', `${commit || 'feat: 这是脚手架 push 的代码'}`]);
 
       // 提交代码
       const { stderr } = await execa('git', ['push', 'origin', 'master']);

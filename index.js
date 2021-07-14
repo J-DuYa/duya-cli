@@ -22,12 +22,28 @@ program
   })
 
 program
-  .command('publish [registry]')
+  .command('publish [registry] [commit]')
   .description('该指令用于发布区块、界面模版、应用')
-  .action(registry => {
+  .action((...args) => {
+    let registry, commit;
+
+    const REGISTRT_REGEX = /^(registry=|REGISTRY=)/;
+    const GIT_COMMIT_MESSAGE = /^(commit=|COMMIT=)/;
+    
+    args.forEach(cmd => {
+      if (typeof cmd === 'string') {
+        if (REGISTRT_REGEX.test(cmd)) {
+          registry = cmd;
+        } else if (GIT_COMMIT_MESSAGE.test(cmd)) {
+          commit = cmd;
+        }
+      }
+    });
+
     // 发布区块、界面模版、应用
     require('./libs/publish').call(this, {
       registry,
+      commit,
     });
   })
 
