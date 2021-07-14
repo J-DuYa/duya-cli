@@ -6,10 +6,13 @@ require('module-alias/register');
 const commander = require('commander');
 const { info } = require('@logger');
 const { getVersion } = require('@utils/version');
-
 const { program } = commander;
 
 // 读取 package.json 的版本号
+
+program
+  .option('-v')
+  .description('duya cli 的版本号')
 
 program
   .command('version')
@@ -19,11 +22,13 @@ program
   })
 
 program
-  .command('publish')
+  .command('publish [registry]')
   .description('该指令用于发布区块、界面模版、应用')
-  .action(() => {
+  .action(registry => {
     // 发布区块、界面模版、应用
-    require('./libs/publish').call(this);
+    require('./libs/publish').call(this, {
+      registry,
+    });
   })
 
 commander.parse(process.argv);

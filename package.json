@@ -1,6 +1,6 @@
 {
   "name": "@duya/cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "脚手架",
   "main": "index.js",
   "bin": {
