@@ -9,11 +9,19 @@ const { getVersion } = require('@utils/version');
 const { program } = commander;
 
 // 读取 package.json 的版本号
+console.log(` _____        _     _         ______ _       _____ 
+(____ \      | |   | |       / _____) |     (_____)
+ _   \ \ _   | |___| |___   | /     | |        _   
+| |   | | | | \_____/ _  |  | |     | |       | |  
+| |__/ /| |_| | ___( ( | |  | \_____| |_____ _| |_ 
+|_____/  \____|(___)\_||_|   \______)_______|_____)
+                                                   `)
 
 program
   .option('-v')
   .description('duya cli 的版本号')
 
+/* 查看 CLI 版本 */  
 program
   .command('version')
   .description('duya cli 的版本号')
@@ -21,6 +29,7 @@ program
     info(`duya cli 当前版本号:${await getVersion()}`);
   })
 
+/* 发布区块、界面模版、应用 */  
 program
   .command('publish [registry] [commit]')
   .description('该指令用于发布区块、界面模版、应用')
@@ -40,11 +49,19 @@ program
       }
     });
 
-    // 发布区块、界面模版、应用
-    require('./libs/publish').call(this, {
+    require('@libs/publish').call(this, {
       registry,
       commit,
     });
   })
+
+  /* 初始化区块、界面模版、应用 */
+  program
+    .command('init <dirname>')
+    .description('初始化项目')
+    .action(dirname => {
+      console.log('dirname', dirname)
+      require('@libs/init').call(this, dirname);
+    })
 
 commander.parse(process.argv);
