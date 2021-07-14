@@ -35,7 +35,7 @@ program
         if (REGISTRT_REGEX.test(cmd)) {
           registry = cmd;
         } else if (GIT_COMMIT_MESSAGE.test(cmd)) {
-          commit = cmd;
+          commit = cmd.replace(GIT_COMMIT_MESSAGE, '');
         }
       }
     });
