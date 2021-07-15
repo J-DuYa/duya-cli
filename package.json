@@ -1,13 +1,19 @@
 {
-  "name": "duya-cli",
-  "version": "1.0.0",
+  "name": "@duya/cli",
+  "version": "0.0.10",
   "description": "脚手架",
   "main": "index.js",
   "bin": {
-    "lamp": "./bin/duya"
+    "duya": "./bin/duya"
   },
   "scripts": {
     "dev": "node index.js"
+  },
+  "_moduleAliases": {
+    "@utils": "./utils",
+    "@logger": "./logs",
+    "@libs": "./libs",
+    "@config": "./config"
   },
   "repository": {
     "type": "git",
@@ -27,5 +33,10 @@
   "devDependencies": {
     "chalk": "^4.1.1",
     "commander": "^8.0.0"
+  },
+  "dependencies": {
+    "execa": "^5.1.1",
+    "inquirer": "^8.1.1",
+    "module-alias": "^2.2.2"
   }
 }
