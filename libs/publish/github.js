@@ -4,40 +4,38 @@ const execa = require('execa');
 const inquirer = require('inquirer');
 const { getSpaceAndTrim } = require('@utils/utils');
 
-module.exports = commit => {
+module.exports = () => {
   return new Promise(async resolve => {
     try {
-      let COMMIT_MESSAGE = commit;
+      let COMMIT_MESSAGE;
       // 缓存代码
       await execa('git', ['add', '.']);
 
-      if (!COMMIT_MESSAGE) {
-        const { operation, message } = await inquirer.prompt([{
-          type: 'list',
-          message: '请选择提交类型',
-          name: 'operation',
-          choices: (msg_types || []).map(({ name, value, desciption }) => ({
-            key: value,
-            name: `${name} (${desciption})`,
-            value
-          })),
-          default: 'feature'
-        }, {
-          type: 'input',
-          message: '请输入提交内容描述',
-          name: 'message'
-        }]);
+      const { operation, message } = await inquirer.prompt([{
+        type: 'list',
+        message: '请选择提交类型',
+        name: 'operation',
+        choices: (msg_types || []).map(({ name, value, desciption }) => ({
+          key: value,
+          name: `${name} (${desciption})`,
+          value
+        })),
+        default: 'feature'
+      }, {
+        type: 'input',
+        message: '请输入提交内容描述',
+        name: 'message'
+      }]);
 
-        if (!getSpaceAndTrim(message)) {
-          warning('提交内容描述');
-          return false;
-        }
-
-        COMMIT_MESSAGE = operation + ': ' + message;
+      if (!getSpaceAndTrim(message)) {
+        warning('提交内容描述');
+        return false;
       }
 
+      COMMIT_MESSAGE = operation + ': ' + message;
+
       // 编辑提交信息 暂时写死
-      await execa('git', ['commit', '-m', `${commit || 'feat: 这是脚手架 push 的代码'}`]);
+      await execa('git', ['commit', '-m', `${COMMIT_MESSAGE || 'feat: 这是脚手架 push 的代码'}`]);
 
       // 提交代码
       const { stderr } = await execa('git', ['push', 'origin', 'master']);

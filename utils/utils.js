@@ -1,4 +1,5 @@
 module.exports = {
+  /* 去除空格 */
   getSpaceAndTrim (name) {
 
     if (typeof name !== 'string') {

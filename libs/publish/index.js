@@ -1,11 +1,10 @@
 const { warning } = require('@logger');
 const { publishOpts } = require('@config/config');
-const npm = require('./npm');
-const push = require('./github');
+const { publishAll, publishDepository, publishNPM } = require('./publish');
 const inquirer = require('inquirer');
 
 /* 发布脚本 */
-module.exports = async ({ registry, commit }) => {
+module.exports = async ({ registry }) => {
   // 为了广度使用支持发布到 github
   warning('为了广度使用支持发布到 github\n');
 
@@ -23,18 +22,14 @@ module.exports = async ({ registry, commit }) => {
   });
 
   switch (operation) {
-    case 'all':
-      await npm(registry);
-      await push(commit);
+    case 'depository': // github
+      publishDepository();
       break;
-    case 'depository':
-      await push(commit);
+    case 'npm': // npm
+      publishNPM();
       break;
-    case 'npm':
-      await npm(registry);
-      break;
+    case 'all': // 全部应用  
     default: 
-      await npm(registry);
-      await push(commit);
+      publishAll(registry);
   }
 };

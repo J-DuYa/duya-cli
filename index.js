@@ -31,37 +31,40 @@ program
 
 /* 发布区块、界面模版、应用 */  
 program
-  .command('publish [registry] [commit]')
+  .command('publish [registry]')
   .description('该指令用于发布区块、界面模版、应用')
   .action((...args) => {
-    let registry, commit;
+    let registry;
 
     const REGISTRT_REGEX = /^(registry=|REGISTRY=)/;
-    const GIT_COMMIT_MESSAGE = /^(commit=|COMMIT=)/;
     
     args.forEach(cmd => {
       if (typeof cmd === 'string') {
         if (REGISTRT_REGEX.test(cmd)) {
           registry = cmd;
-        } else if (GIT_COMMIT_MESSAGE.test(cmd)) {
-          commit = cmd.replace(GIT_COMMIT_MESSAGE, '');
         }
       }
     });
 
     require('@libs/publish').call(this, {
       registry,
-      commit,
     });
   })
 
-  /* 初始化区块、界面模版、应用 */
-  program
-    .command('init <dirname>')
-    .description('初始化项目')
-    .action(dirname => {
-      console.log('dirname', dirname)
-      require('@libs/init').call(this, dirname);
-    })
+/* 初始化区块、界面模版、应用 */
+program
+  .command('init <dirname>')
+  .description('初始化项目')
+  .action(dirname => {
+    require('@libs/init').call(this, dirname);
+  })
+
+/* eslint */
+program
+  .command('eslint')
+  .description('检查代码是否符合 eslint 标准')
+  .action(dirname => {
+    require('@libs/eslint').call(this);
+  })
 
 commander.parse(process.argv);

@@ -23,5 +23,10 @@ module.exports = {
     { name: 'perf', value: 'perf', desciption: '优化相关' },
     { name: 'test', value: 'test', desciption: '增加测试代码和模版' },
     { name: 'chore', value: 'chore', desciption: '构建过程或辅助工具的变动' },
-  ]
+  ],
+  // program 项目类型
+  concreteTypes: [
+    { name: '普通项目', value: 'default' },
+    { name: 'lerna 项目', value: 'lerna' }
+  ],
 };
