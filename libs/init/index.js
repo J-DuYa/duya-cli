@@ -10,8 +10,7 @@ const execa = require('execa');
 
 module.exports = async dir => {
   try {
-    let type;
-    const PROGRAM_TYPE_OUTPUT = await inquirer.prompt([
+    const { type, name } = await inquirer.prompt([
       {
         type: 'list',
         message: '请选择项目类型',
@@ -22,14 +21,7 @@ module.exports = async dir => {
           value
         })),
         default: 'app'
-      }
-    ]);
-
-    type = PROGRAM_TYPE_OUTPUT.type;
-
-    // 到了当前目录下面
-    const PROGRAM_NAME_OUTPUT = await inquirer.prompt([
-      {
+      }, {
         type: 'input',
         message: '请输入项目名称',
         name: 'name',
@@ -37,9 +29,7 @@ module.exports = async dir => {
       }
     ]);
 
-    const name = getSpaceAndTrim(PROGRAM_NAME_OUTPUT?.name);
-
-    if (!name) {
+    if (!getSpaceAndTrim(name)) {
       warning('项目名称不能为空');
       return;
     }
