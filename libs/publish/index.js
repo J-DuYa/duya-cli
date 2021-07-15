@@ -22,13 +22,13 @@ module.exports = async ({ registry }) => {
   });
 
   switch (operation) {
-    case 'all': // 全部应用
-    case 'depository':
+    case 'depository': // github
       publishDepository();
       break;
-    case 'npm':
+    case 'npm': // npm
       publishNPM();
       break;
+    case 'all': // 全部应用  
     default: 
       publishAll(registry);
   }
