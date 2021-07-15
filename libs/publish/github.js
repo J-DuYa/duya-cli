@@ -16,9 +16,9 @@ module.exports = commit => {
           type: 'list',
           message: '请选择提交类型',
           name: 'operation',
-          choices: (msg_types || []).map(({ name, value }) => ({
+          choices: (msg_types || []).map(({ name, value, desciption }) => ({
             key: value,
-            name: name,
+            name: `${name} (${desciption})`,
             value
           })),
           default: 'feature'

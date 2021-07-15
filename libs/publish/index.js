@@ -12,7 +12,7 @@ module.exports = async ({ registry, commit }) => {
   // 到了当前目录下面
   const { operation } = await inquirer.prompt({
     type: 'list',
-    message: '请输入项目名称',
+    message: '请选择发布方式',
     name: 'operation',
     choices: (publishOpts || []).map(({ name, value }) => ({
       key: value,
