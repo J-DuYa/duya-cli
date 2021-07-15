@@ -1,7 +1,6 @@
 const { warning } = require('@logger');
 const { publishOpts } = require('@config/config');
-const npm = require('./npm');
-const push = require('./github');
+const { publishAll, publishDepository, publishNPM } = require('./publish');
 const inquirer = require('inquirer');
 
 /* 发布脚本 */
@@ -23,18 +22,14 @@ module.exports = async ({ registry }) => {
   });
 
   switch (operation) {
-    case 'all':
-      await npm(registry);
-      await push();
-      break;
+    case 'all': // 全部应用
     case 'depository':
-      await push();
+      publishDepository();
       break;
     case 'npm':
-      await npm(registry);
+      publishNPM();
       break;
     default: 
-      await npm(registry);
-      await push();
+      publishAll(registry);
   }
 };
