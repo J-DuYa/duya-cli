@@ -5,7 +5,7 @@ const push = require('./github');
 const inquirer = require('inquirer');
 
 /* 发布脚本 */
-module.exports = async ({ registry, commit }) => {
+module.exports = async ({ registry }) => {
   // 为了广度使用支持发布到 github
   warning('为了广度使用支持发布到 github\n');
 
@@ -25,16 +25,16 @@ module.exports = async ({ registry, commit }) => {
   switch (operation) {
     case 'all':
       await npm(registry);
-      await push(commit);
+      await push();
       break;
     case 'depository':
-      await push(commit);
+      await push();
       break;
     case 'npm':
       await npm(registry);
       break;
     default: 
       await npm(registry);
-      await push(commit);
+      await push();
   }
 };

@@ -31,10 +31,10 @@ program
 
 /* 发布区块、界面模版、应用 */  
 program
-  .command('publish [registry] [commit]')
+  .command('publish [registry]')
   .description('该指令用于发布区块、界面模版、应用')
   .action((...args) => {
-    let registry, commit;
+    let registry;
 
     const REGISTRT_REGEX = /^(registry=|REGISTRY=)/;
     const GIT_COMMIT_MESSAGE = /^(commit=|COMMIT=)/;
@@ -43,15 +43,12 @@ program
       if (typeof cmd === 'string') {
         if (REGISTRT_REGEX.test(cmd)) {
           registry = cmd;
-        } else if (GIT_COMMIT_MESSAGE.test(cmd)) {
-          commit = cmd.replace(GIT_COMMIT_MESSAGE, '');
         }
       }
     });
 
     require('@libs/publish').call(this, {
       registry,
-      commit,
     });
   })
 
