@@ -7,7 +7,6 @@ const { error, info, warning } = require('@logger');
 const inquirer = require('inquirer');
 const execa = require('execa');
 
-
 function getSpaceAndTrim (name) {
 
   if (typeof name !== 'string') {
@@ -27,11 +26,11 @@ module.exports = async dir => {
         type: 'list',
         message: '请选择项目类型',
         name: 'type',
-        choices: [{
-          key: 'app',
-          name: '应用模版',
-          value: 'app'
-        }],
+        choices: (templates || []).map(({ name, value }) => ({
+          key: value,
+          name: name,
+          value
+        })),
         default: 'app'
       }
     ]);
