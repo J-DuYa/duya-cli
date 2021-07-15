@@ -10,10 +10,12 @@ npm install -g @duya/cli
 - [x] 获取当前开发版本号
 - [x] 拉取应用、区块以及界面模版
 - [  ] 发布 lerna 项目
+- [  ] eslint 代码检查
 
 ## 指令列表
 |  指令  | 含义 |
 |  ----  | ---- |
 | -v, version | 查看当前 CLI 版本 |
 | publish <registry> | 发布项目 |
-| init <dir> | 初始化项目 |
+| init <dirname> | 初始化项目 |
+| eslint | eslint 代码检查 |
