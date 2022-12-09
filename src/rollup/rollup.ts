@@ -34,7 +34,6 @@ export default async function rollupRunner ({ cwd, enrtyPath }: { cwd: string; e
       globals: {
 
       },
-      name: 'duya'
     })
   } catch (e: unknown) { error(e) }
 }

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = require("path");
 const plugin_typescript_1 = __importDefault(require("@rollup/plugin-typescript"));
 const plugin_commonjs_1 = __importDefault(require("@rollup/plugin-commonjs"));
+const rollup_plugin_uglify_1 = require("rollup-plugin-uglify");
 const plugin_node_resolve_1 = require("@rollup/plugin-node-resolve");
 const plugin_babel_1 = require("@rollup/plugin-babel");
 const logger_1 = require("./../logger");
@@ -21,25 +22,29 @@ function getRollupConfig({ entry, projectPath, }) {
         (0, logger_1.error)('.duyarc.js or .duyarc.ts file is not exist.');
     }
     const fileName = projectPath.split('/')[projectPath.split('/').length - 1];
+    console.log('fileName', fileName);
     const { output = {
         format: 'umd',
         name: fileName,
         dir: 'dist'
     } } = require((0, path_1.join)(projectPath, cfgPath));
+    console.log('output?.name', output === null || output === void 0 ? void 0 : output.name);
     return {
         rollupCfg: {
             input: entry,
             output: {
-                dir: output === null || output === void 0 ? void 0 : output.dist,
+                file: 'core.umd.js',
+                dir: (output === null || output === void 0 ? void 0 : output.dist) || 'dist',
                 format: output === null || output === void 0 ? void 0 : output.format,
                 sourcemap: false,
-                name: output === null || output === void 0 ? void 0 : output.name,
+                name: (output === null || output === void 0 ? void 0 : output.name) || fileName,
                 inlineDynamicImports: true,
             },
             plugins: [
                 (0, plugin_babel_1.babel)({
                     babelHelpers: 'bundled'
                 }),
+                (0, rollup_plugin_uglify_1.uglify)(),
                 (0, plugin_node_resolve_1.nodeResolve)(),
                 (0, plugin_commonjs_1.default)(),
                 (0, plugin_typescript_1.default)()

@@ -11,6 +11,7 @@ interface IRollupConfig {
             sourcemap: boolean;
             name: string;
             inlineDynamicImports: boolean;
+            file: string;
         };
         plugins: Array<any>;
     };

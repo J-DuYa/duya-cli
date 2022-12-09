@@ -32,7 +32,6 @@ async function rollupRunner({ cwd, enrtyPath }) {
             sourcemap: rollupCfg === null || rollupCfg === void 0 ? void 0 : rollupCfg.output.sourcemap,
             file: (0, path_1.join)(projectPath, 'dist/index.js'),
             globals: {},
-            name: 'duya'
         });
     }
     catch (e) {

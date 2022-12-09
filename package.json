@@ -38,6 +38,7 @@
     "pdf-dist": "^1.0.0",
     "pino": "^8.7.0",
     "rollup": "^3.7.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "tslib": "^2.4.1",
     "v8-compile-cache": "^2.3.0",
     "yargs-parser": "^21.1.1"

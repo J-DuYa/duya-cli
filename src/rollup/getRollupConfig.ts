@@ -1,6 +1,7 @@
 import { join } from 'path'
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
+import { uglify } from 'rollup-plugin-uglify'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { babel } from '@rollup/plugin-babel'
 import { error } from './../logger'
@@ -21,6 +22,7 @@ interface IRollupConfig {
       sourcemap: boolean;
       name: string;
       inlineDynamicImports: boolean;
+      file: string;
     },
     plugins: Array<any>;
   };
@@ -41,6 +43,7 @@ export default function getRollupConfig ({
   }
 
   const fileName = projectPath.split('/')[projectPath.split('/').length - 1]
+  console.log('fileName', fileName)
 
   const {
     output = {
@@ -50,20 +53,24 @@ export default function getRollupConfig ({
     }
   } = require(join(projectPath, cfgPath as string))
 
+  console.log('output?.name', output?.name)
+
   return {
     rollupCfg: {
       input: entry,
       output: {
-        dir: output?.dist,
+        file: 'core.umd.js',
+        dir: output?.dist || 'dist',
         format: output?.format,
         sourcemap: false,
-        name: output?.name,
+        name: output?.name || fileName,
         inlineDynamicImports: true,
       },
       plugins: [
         babel({
           babelHelpers: 'bundled'
         }),
+        uglify(),
         nodeResolve(),
         commonjs(),
         typescript()
