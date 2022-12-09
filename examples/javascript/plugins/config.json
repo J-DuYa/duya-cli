@@ -1,0 +1,7 @@
+{
+  "name": "",
+  "plugins": {
+    "base": ["plugins/base"],
+    "test": {}
+  }
+}

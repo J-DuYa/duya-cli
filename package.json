@@ -1,40 +1,51 @@
 {
   "name": "@duya/cli",
-  "version": "0.0.16",
-  "description": "脚手架",
-  "main": "index.js",
-  "bin": {
-    "duya": "./bin/duya"
-  },
-  "scripts": {
-    "dev": "node index.js"
-  },
-  "_moduleAliases": {
-    "@utils": "./utils",
-    "@logger": "./logs",
-    "@libs": "./libs",
-    "@config": "./config"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/J-DuYa/duya-cli.git"
-  },
-  "keywords": [
-    "cli",
-    "node",
-    "javascript"
-  ],
-  "author": "duya",
+  "version": "1.0.0",
+  "description": "插件构建工具",
+  "author": "t-duya <18795905365@163.com>",
+  "homepage": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/J-DuYa/duya-cli/issues"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "duya": "bin/duya.js"
   },
-  "homepage": "https://github.com/J-DuYa/duya-cli#readme",
+  "packageManager": "pnpm@7.3.0",
+  "files": [
+    "dist",
+    "bin",
+    "compiled"
+  ],
+  "scripts": {
+    "build": "pnpm tsc"
+  },
+  "peerDependencies": {
+    "typescript": "*"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "execa": "^5.1.1",
-    "inquirer": "^8.1.1",
-    "module-alias": "^2.2.2",
-    "chalk": "^4.1.1",
-    "commander": "^8.0.0"
+    "@babel/core": "^7.20.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^23.0.4",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "chalk": "4.1.1",
+    "lodash": "^4.17.21",
+    "pdf-dist": "^1.0.0",
+    "pino": "^8.7.0",
+    "rollup": "^3.7.0",
+    "tslib": "^2.4.1",
+    "v8-compile-cache": "^2.3.0",
+    "yargs-parser": "^21.1.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.11.12",
+    "@types/yargs-parser": "^21.0.0",
+    "typescript": "^4.9.4"
   }
 }
